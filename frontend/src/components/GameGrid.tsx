@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import { useState } from "react";
 import logo from "../assets/logo.webp";
 import { BsSearch } from "react-icons/bs";
 import useGames from "../hooks/useGames";
@@ -60,7 +59,7 @@ const GameGrid = () => {
           </div>
         </div>
       </nav>
-      <div className="container text-center">
+      <div className="container">
         <div className="row row-cols-3">
           {isLoading && <p>Loading...</p>}
 
