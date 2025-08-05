@@ -3,6 +3,7 @@ import apiClient from "../services/api-client";
 import logo from "../assets/logo.webp";
 import { BsSearch } from "react-icons/bs";
 import useGames from "../hooks/useGames";
+import GameCard from "./GameCard";
 
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
@@ -59,17 +60,17 @@ const GameGrid = () => {
           </div>
         </div>
       </nav>
-      <div>
-        {isLoading && <p>Loading...</p>}
+      <div className="container text-center">
+        <div className="row row-cols-3">
+          {isLoading && <p>Loading...</p>}
 
-        <ul className="list-group">
           {games &&
             games.map((game) => (
-              <li className="list-group-item" key={game.id}>
-                {game.name}
-              </li>
+              <div className="col mt-3 card-group" key={game.id}>
+                <GameCard game={game} />
+              </div>
             ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
