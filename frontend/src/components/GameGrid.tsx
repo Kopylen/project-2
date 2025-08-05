@@ -3,12 +3,15 @@ import logo from "../assets/logo.webp";
 import { BsSearch } from "react-icons/bs";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
+import GameCardSkeleton from "./GameCardSkeleton";
 
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
 
   const { games, error, isLoading } = useGames();
+
+  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <div data-bs-theme={darkMode ? "dark" : "light"}>
@@ -61,8 +64,13 @@ const GameGrid = () => {
       </nav>
       <div className="container">
         <div className="row row-cols-3">
-          {isLoading && <p>Loading...</p>}
-
+          {isLoading &&
+            skeleton.map((p) => (
+              <div className="col mt-3 card-group" key={p}>
+                {" "}
+                <GameCardSkeleton />{" "}
+              </div>
+            ))}
           {games &&
             games.map((game) => (
               <div className="col mt-3 card-group" key={game.id}>
