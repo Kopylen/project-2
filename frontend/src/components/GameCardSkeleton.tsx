@@ -8,7 +8,7 @@ const GameCardSkeleton = () => {
       <div className="card border rounded">
         <div className="card-body">
           <span className="card-img-top">
-            <Image width={400} height={200} />
+            <Image width={280} height={200} />
           </span>
           <Skeleton />
           <br />

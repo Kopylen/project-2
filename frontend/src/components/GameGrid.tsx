@@ -4,18 +4,27 @@ import { BsSearch } from "react-icons/bs";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GenreList from "./GenreList";
 
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
 
-  const { games, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames();
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div data-bs-theme={darkMode ? "dark" : "light"}>
+    <div
+      data-bs-theme={darkMode ? "dark" : "light"}
+      className={
+        darkMode
+          ? "bg-dark text-white min-vh-100"
+          : "bg-light text-dark min-vh-100"
+      }
+    >
       {error && <p> {error} </p>}
+      {/* NavBar */}
       <nav
         className="navbar bg-body-tertiary"
         data-bs-theme={darkMode ? "dark" : "light"}
@@ -62,21 +71,42 @@ const GameGrid = () => {
           </div>
         </div>
       </nav>
-      <div className="container">
-        <div className="row row-cols-3">
-          {isLoading &&
-            skeleton.map((p) => (
-              <div className="col mt-3 card-group" key={p}>
-                {" "}
-                <GameCardSkeleton />{" "}
-              </div>
-            ))}
-          {games &&
-            games.map((game) => (
-              <div className="col mt-3 card-group" key={game.id}>
-                <GameCard game={game} />
-              </div>
-            ))}
+
+      {/** Main Content and Aside **/}
+
+      <div
+        className="container mt-4"
+        data-bs-theme={darkMode ? "dark" : "light"}
+      >
+        <div className="row">
+          <aside className="col-md-3">
+            <div
+              className={`p-3 ${
+                darkMode ? "bg-dark text-white" : "bg-light text-dark"
+              }`}
+            >
+              <GenreList />
+            </div>
+          </aside>
+
+          <main className="col-md-9">
+            <div className="row row-cols-1 row-cols-md-3 g-3">
+              {/* Main content here */}
+              {isLoading &&
+                skeleton.map((p) => (
+                  <div className="col" key={p}>
+                    {" "}
+                    <GameCardSkeleton />{" "}
+                  </div>
+                ))}
+              {data &&
+                data.map((game) => (
+                  <div className="col" key={game.id}>
+                    <GameCard game={game} />
+                  </div>
+                ))}
+            </div>
+          </main>
         </div>
       </div>
     </div>
