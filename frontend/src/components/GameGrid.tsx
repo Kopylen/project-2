@@ -74,12 +74,9 @@ const GameGrid = () => {
 
       {/** Main Content and Aside **/}
 
-      <div
-        className="container mt-4"
-        data-bs-theme={darkMode ? "dark" : "light"}
-      >
+      <div className="mt-4" data-bs-theme={darkMode ? "dark" : "light"}>
         <div className="row">
-          <aside className="col-md-3">
+          <aside className="col-md-2">
             <div
               className={`p-3 ${
                 darkMode ? "bg-dark text-white" : "bg-light text-dark"
