@@ -1,10 +1,16 @@
 import useGenres from "../hooks/useGenres.ts";
+import Spinner from "react-bootstrap/Spinner";
 
 const GenreList = () => {
-  const { data } = useGenres();
+  const { data, isLoading } = useGenres();
   return (
     <>
       <h1 className="text-2xl"> Genres </h1>
+      {isLoading && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
       <ul className="list-group">
         {data.map((genre) => (
           <li key={genre.id} className="p-1 list-group-item">
