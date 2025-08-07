@@ -10,7 +10,14 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
   const { data, isLoading } = useGenres();
   return (
     <>
-      {/* <h1 className="text-2xl"> Genres </h1> */}
+      <h1
+        className="text-2xl"
+        onClick={() => onSelectGenre(null)}
+        style={{ cursor: "pointer" }}
+      >
+        {" "}
+        Genres{" "}
+      </h1>
       {isLoading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>

@@ -1,7 +1,5 @@
 import type { GameQuery } from "../components/GameGrid";
 import useData from "./useData";
-import type { Genre } from "./useGenres";
-import type { Platforms } from "./usePlatforms";
 
 export interface Platform {
   id: number;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
 }
 
 const SearchInput = ({ onSearch }: Props) => {
-  const [Color, setColor] = useState("gray");
+  const Color = "gray";
 
   const ref = useRef<HTMLInputElement>(null);
 

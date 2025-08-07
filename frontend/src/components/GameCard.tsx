@@ -24,9 +24,11 @@ const GameCard = ({ game }: Props) => {
           <h4 className="text-center"> {game.name} </h4>
           <div className="d-flex justify-content-between">
             <div>
-              <PlatformIconList
-                platforms={game.parent_platforms.map((p) => p.platform)}
-              />
+              {game.parent_platforms && (
+                <PlatformIconList
+                  platforms={game.parent_platforms.map((p) => p.platform)}
+                />
+              )}
             </div>
             {game.metacritic && (
               <div className={`border rounded px-2 py-1 ${color}`}>

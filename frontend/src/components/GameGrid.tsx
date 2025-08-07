@@ -1,6 +1,5 @@
 import { useState } from "react";
 import logo from "../assets/logo.webp";
-import { BsSearch } from "react-icons/bs";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -10,6 +9,7 @@ import PlatformSelector from "./PlatformSelector";
 import type { Platforms } from "../hooks/usePlatforms";
 import SortSelector from "./SortSelector";
 import SearchInput from "./SearchInput";
+import GameHeading from "./GameHeading";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -97,6 +97,7 @@ const GameGrid = () => {
 
           <main className="col-md-9">
             <div className="py-3">
+              <GameHeading gameQuery={gameQuery} />
               <PlatformSelector
                 onSelectedPlatform={(platform) =>
                   setGameQuery({ ...gameQuery, platform })
