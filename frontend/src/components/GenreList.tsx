@@ -18,13 +18,13 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
       )}
       <ul className="list-unstyled">
         {data.map((genre) => (
-          <li key={genre.id} className="p-1">
+          <li key={genre.id} className="">
             {" "}
             <img
               className="boder rounded p-1"
               src={genre.image_background}
-              height="38px"
-              width="38"
+              height="40px"
+              width="40"
             />
             <span
               onClick={() => onSelectGenre(genre)}

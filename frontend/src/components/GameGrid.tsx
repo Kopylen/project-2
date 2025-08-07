@@ -8,10 +8,12 @@ import GenreList from "./GenreList";
 import type { Genre } from "../hooks/useGenres";
 import PlatformSelector from "./PlatformSelector";
 import type { Platforms } from "../hooks/usePlatforms";
+import SortSelector from "./SortSelector";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platforms | null;
+  sortOrder: string;
 }
 
 const GameGrid = () => {
@@ -19,6 +21,7 @@ const GameGrid = () => {
   const [darkMode, setDarkMode] = useState(true);
 
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const [oredering, setOredering] = useState("Relevance");
 
   const { data, error, isLoading } = useGames(gameQuery);
 
@@ -102,12 +105,22 @@ const GameGrid = () => {
           </aside>
 
           <main className="col-md-9">
-            <PlatformSelector
-              onSelectedPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
-              }
-              Platform={gameQuery.platform}
-            />
+            <div className="py-3">
+              <PlatformSelector
+                onSelectedPlatform={(platform) =>
+                  setGameQuery({ ...gameQuery, platform })
+                }
+                Platform={gameQuery.platform}
+              />
+              <SortSelector
+                onSelectOrder={(sortOrder) => {
+                  setGameQuery({ ...gameQuery, sortOrder: sortOrder.value });
+                  setOredering(sortOrder.label);
+                }}
+                selectedOrder={oredering}
+              />
+            </div>
+
             <div className="row row-cols-1 row-cols-md-3 g-3">
               {/* Main content here */}
               {isLoading &&

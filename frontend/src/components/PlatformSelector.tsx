@@ -9,13 +9,13 @@ const PlatformSelector = ({ onSelectedPlatform, Platform }: Props) => {
   const { data } = usePlatforms();
 
   return (
-    <div className="btn-group mb-2">
+    <div className="btn-group">
       <button
         type="button"
         className="btn btn-secondary dropdown-toggle"
         data-bs-toggle="dropdown"
       >
-        {Platform ? Platform.name : "Any"}
+        Platform: {Platform ? Platform.name : "Any"}
       </button>
       <ul
         className="dropdown-menu"
