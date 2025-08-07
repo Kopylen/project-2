@@ -5,12 +5,14 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GenreList from "./GenreList";
+import type { Genre } from "../hooks/useGenres";
 
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
 
-  const { data, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames(selectedGenre);
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -82,7 +84,12 @@ const GameGrid = () => {
                 darkMode ? "bg-dark text-white" : "bg-light text-dark"
               }`}
             >
-              <GenreList />
+              <GenreList
+                onSelectGenre={(genre) => {
+                  setSelectedGenre(genre);
+                }}
+                Genre={selectedGenre}
+              />
             </div>
           </aside>
 
