@@ -1,3 +1,4 @@
+import type { GameQuery } from "../components/GameGrid";
 import useData from "./useData";
 import type { Genre } from "./useGenres";
 import type { Platforms } from "./usePlatforms";
@@ -18,14 +19,9 @@ export interface Game {
   platforms: number;
 }
 
-interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platforms | null;
-}
-
-const useGames = ({ selectedGenre, selectedPlatform }: Props) =>
+const useGames = (gameQuery: GameQuery) =>
   useData<Game>("/games", {
-    params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+    params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id },
   });
 
 export default useGames;

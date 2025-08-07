@@ -9,18 +9,18 @@ import type { Genre } from "../hooks/useGenres";
 import PlatformSelector from "./PlatformSelector";
 import type { Platforms } from "../hooks/usePlatforms";
 
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platforms | null;
+}
+
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platforms | null>(
-    null
-  );
 
-  const { data, error, isLoading } = useGames({
-    selectedGenre,
-    selectedPlatform,
-  });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
+  const { data, error, isLoading } = useGames(gameQuery);
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -94,17 +94,19 @@ const GameGrid = () => {
             >
               <GenreList
                 onSelectGenre={(genre) => {
-                  setSelectedGenre(genre);
+                  setGameQuery({ ...gameQuery, genre });
                 }}
-                Genre={selectedGenre}
+                Genre={gameQuery.genre}
               />
             </div>
           </aside>
 
           <main className="col-md-9">
             <PlatformSelector
-              onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
-              Platform={selectedPlatform}
+              onSelectedPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+              Platform={gameQuery.platform}
             />
             <div className="row row-cols-1 row-cols-md-3 g-3">
               {/* Main content here */}
