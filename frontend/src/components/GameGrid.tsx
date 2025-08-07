@@ -6,13 +6,21 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GenreList from "./GenreList";
 import type { Genre } from "../hooks/useGenres";
+import PlatformSelector from "./PlatformSelector";
+import type { Platforms } from "../hooks/usePlatforms";
 
 const GameGrid = () => {
   const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platforms | null>(
+    null
+  );
 
-  const { data, error, isLoading } = useGames(selectedGenre);
+  const { data, error, isLoading } = useGames({
+    selectedGenre,
+    selectedPlatform,
+  });
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -94,6 +102,10 @@ const GameGrid = () => {
           </aside>
 
           <main className="col-md-9">
+            <PlatformSelector
+              onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
+              Platform={selectedPlatform}
+            />
             <div className="row row-cols-1 row-cols-md-3 g-3">
               {/* Main content here */}
               {isLoading &&

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
 import useData from "./useData";
 import type { Genre } from "./useGenres";
+import type { Platforms } from "./usePlatforms";
 
 export interface Platform {
   id: number;
@@ -17,9 +15,17 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   genres: string;
+  platforms: number;
 }
 
-const useGames = (selectedGenre: Genre | null) =>
-  useData<Game>("/games", { params: { genres: selectedGenre?.id } });
+interface Props {
+  selectedGenre: Genre | null;
+  selectedPlatform: Platforms | null;
+}
+
+const useGames = ({ selectedGenre, selectedPlatform }: Props) =>
+  useData<Game>("/games", {
+    params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+  });
 
 export default useGames;
