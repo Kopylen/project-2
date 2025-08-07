@@ -28,9 +28,11 @@ const GameCard = ({ game }: Props) => {
                 platforms={game.parent_platforms.map((p) => p.platform)}
               />
             </div>
-            <div className={`border rounded px-2 py-1 ${color}`}>
-              <CriticScore score={game.metacritic} />
-            </div>
+            {game.metacritic && (
+              <div className={`border rounded px-2 py-1 ${color}`}>
+                <CriticScore score={game.metacritic} />
+              </div>
+            )}
           </div>
         </div>
       </div>

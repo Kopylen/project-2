@@ -33,7 +33,11 @@ const SortSelector = ({ selectedOrder, onSelectOrder }: Props) => {
       >
         <li>
           {items.map((item) => (
-            <a className="dropdown-item" onClick={() => onSelectOrder(item)}>
+            <a
+              key={item.label}
+              className="dropdown-item"
+              onClick={() => onSelectOrder(item)}
+            >
               {item.label}
             </a>
           ))}

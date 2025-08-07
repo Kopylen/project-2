@@ -9,15 +9,16 @@ import type { Genre } from "../hooks/useGenres";
 import PlatformSelector from "./PlatformSelector";
 import type { Platforms } from "../hooks/usePlatforms";
 import SortSelector from "./SortSelector";
+import SearchInput from "./SearchInput";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platforms | null;
   sortOrder: string;
+  searchText: string;
 }
 
 const GameGrid = () => {
-  const [Color, setColor] = useState("gray");
   const [darkMode, setDarkMode] = useState(true);
 
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -49,23 +50,13 @@ const GameGrid = () => {
               Rawg.io
             </a>
           </div>
-          <div className="col-12 col-md-9">
-            <form className="d-flex" role="search">
-              <div className="input-group w-100">
-                <span
-                  className={`input-group-text bg-${Color} rounded-start-5 border-end-0`}
-                >
-                  <BsSearch />
-                </span>
-                <input
-                  type="search"
-                  className={`form-control border-start-0 rounded-end-5 bg-${Color}`}
-                  placeholder="Search games..."
-                  aria-label="Search"
-                />
-              </div>
-            </form>
-          </div>
+          {/* Searching bar */}
+          <SearchInput
+            onSearch={(searchText) =>
+              setGameQuery({ ...gameQuery, searchText })
+            }
+          />
+
           <div className="form-check form-switch">
             <input
               className="form-check-input"
