@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Platforms } from "../hooks/usePlatforms";
 import {
   FaWindows,
@@ -11,11 +11,11 @@ import {
 import { SiNintendo } from "react-icons/si";
 
 interface Props {
-  onSelectedPlatform: (platform: Platforms) => void;
+  onSelectedPlatform: (platform: Platforms | null) => void;
   Platform: Platforms | null;
 }
 
-const PlatformList = ({ onSelectedPlatform, Platform }: Props) => {
+const PlatformList = ({ onSelectedPlatform }: Props) => {
   const data = [
     { name: "PC", img: FaWindows, id: 4 },
     { name: "PlayStation 4", img: FaPlaystation, id: 18 },

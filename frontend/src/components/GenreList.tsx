@@ -2,7 +2,7 @@ import useGenres, { type Genre } from "../hooks/useGenres.ts";
 import Spinner from "react-bootstrap/Spinner";
 
 interface Props {
-  onSelectGenre: (genre: Genre) => void;
+  onSelectGenre: (genre: Genre | null) => void;
   Genre: Genre | null;
 }
 
