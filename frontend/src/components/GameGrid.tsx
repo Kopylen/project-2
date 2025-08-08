@@ -5,11 +5,11 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GenreList from "./GenreList";
 import type { Genre } from "../hooks/useGenres";
-import PlatformSelector from "./PlatformSelector";
 import type { Platforms } from "../hooks/usePlatforms";
 import SortSelector from "./SortSelector";
 import SearchInput from "./SearchInput";
 import GameHeading from "./GameHeading";
+import PlatformList from "./PlatformList";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -33,7 +33,7 @@ const GameGrid = () => {
       data-bs-theme={darkMode ? "dark" : "light"}
       className={
         darkMode
-          ? "bg-dark text-white min-vh-100"
+          ? "bg-black text-white min-vh-100"
           : "bg-light text-dark min-vh-100"
       }
     >
@@ -78,14 +78,20 @@ const GameGrid = () => {
 
       {/** Main Content and Aside **/}
 
-      <div className="mt-4" data-bs-theme={darkMode ? "dark" : "light"}>
+      <div className="mt-4" data-bs-theme={darkMode ? "" : "light"}>
         <div className="row">
           <aside className="col-md-2">
             <div
               className={`p-3 ${
-                darkMode ? "bg-dark text-white" : "bg-light text-dark"
+                darkMode ? "bg-black text-white" : "bg-light text-dark"
               }`}
             >
+              <PlatformList
+                onSelectedPlatform={(platform) =>
+                  setGameQuery({ ...gameQuery, platform })
+                }
+                Platform={gameQuery.platform}
+              />
               <GenreList
                 onSelectGenre={(genre) => {
                   setGameQuery({ ...gameQuery, genre });
@@ -98,12 +104,6 @@ const GameGrid = () => {
           <main className="col-md-9">
             <div className="py-3">
               <GameHeading gameQuery={gameQuery} />
-              <PlatformSelector
-                onSelectedPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platform })
-                }
-                Platform={gameQuery.platform}
-              />
               <SortSelector
                 onSelectOrder={(sortOrder) => {
                   setGameQuery({ ...gameQuery, sortOrder: sortOrder.value });

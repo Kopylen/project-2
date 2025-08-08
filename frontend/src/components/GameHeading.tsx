@@ -8,7 +8,7 @@ const GameHeading = ({ gameQuery }: Props) => {
   const heading = `${gameQuery?.platform?.name || ""} ${
     gameQuery?.genre?.name || ""
   } Games`;
-  return <h1 className="text-3xl pb-2">{heading}</h1>;
+  return <h1 className="display-5 pb-2">{heading}</h1>;
 };
 
 export default GameHeading;

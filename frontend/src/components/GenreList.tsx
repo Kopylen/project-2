@@ -11,7 +11,7 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
   return (
     <>
       <h1
-        className="text-2xl"
+        className="display-6"
         onClick={() => onSelectGenre(null)}
         style={{ cursor: "pointer" }}
       >
