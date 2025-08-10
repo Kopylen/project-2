@@ -28,7 +28,7 @@ const PlatformList = ({ onSelectedPlatform }: Props) => {
   const [selectedItem, setSelectedItem] = useState(0);
 
   return (
-    <div className="p-1">
+    <div className="p-3">
       <h1
         className="display-6"
         style={{ cursor: "pointer" }}
@@ -37,7 +37,7 @@ const PlatformList = ({ onSelectedPlatform }: Props) => {
         {" "}
         Platform{" "}
       </h1>
-      <ul className="list-unstyled px-1">
+      <ul className="list-unstyled px-2">
         {data.map((platform) => (
           <li
             key={platform.id}

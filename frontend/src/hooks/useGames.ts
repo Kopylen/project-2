@@ -1,4 +1,4 @@
-import type { GameQuery } from "../components/GameGrid";
+import type { GameQuery } from "../App";
 import useData from "./useData";
 
 export interface Platform {
@@ -15,15 +15,16 @@ export interface Game {
   metacritic: number;
   genres: string;
   platforms: number;
+  dates: string;
 }
 
 const useGames = (gameQuery: GameQuery) =>
-  useData<Game>("/games", {
+  useData<Game>(`/games`, {
     params: {
       genres: gameQuery.genre?.id,
       platforms: gameQuery.platform?.id,
       ordering: gameQuery?.sortOrder,
-      search: gameQuery.searchText,
+      search: gameQuery?.searchText,
     },
   });
 

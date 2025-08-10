@@ -9,7 +9,7 @@ interface Props {
 const GenreList = ({ onSelectGenre, Genre }: Props) => {
   const { data, isLoading } = useGenres();
   return (
-    <>
+    <div className="p-3">
       <h1
         className="display-6"
         onClick={() => onSelectGenre(null)}
@@ -28,14 +28,16 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
           <li key={genre.id} className="">
             {" "}
             <img
-              className="boder rounded p-1"
+              className="boder rounded p-2"
               src={genre.image_background}
-              height="40px"
-              width="40"
+              height="57px"
+              width="57px"
             />
             <span
               onClick={() => onSelectGenre(genre)}
-              className={`underline underline ${Genre == genre && "fw-bolder"}`}
+              className={`underline underline ${
+                Genre == genre && "fw-bolder"
+              } `}
               style={{ cursor: "pointer" }}
             >
               {genre.name}
@@ -43,7 +45,7 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
