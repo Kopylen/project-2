@@ -1,12 +1,8 @@
-import useData from "./useData";
-import type { Game } from "./useGames";
+import type { GameById } from "../components/GamePage";
+import useDataForObject from "./useDataForObject";
 
-export interface getGame {
-  id: number;
-}
-
-const useGamesById = (game: getGame) => {
-  return useData<Game>(`/games/${game.id}`);
+const useGamesById = (game: string | undefined) => {
+  return useDataForObject<GameById>(`/games/${game}`);
 };
 
 export default useGamesById;

@@ -1,8 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "bootstrap/scss/bootstrap.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css"; // loads both bootstrap + tailwind
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GamePage from "./components/GamePage.tsx";
