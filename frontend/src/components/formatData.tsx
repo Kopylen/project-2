@@ -1,14 +1,14 @@
 function formatDates(dateString: string | undefined) {
-  if (dateString == undefined) return;
-  return dateString
-    .split(",") // split into individual dates
-    .map((date) =>
-      new Date(date).toLocaleDateString("en-US", {
-        month: "short", // "Jun"
-        day: "numeric", // 26
-        year: "numeric", // 2025
+  if (dateString === undefined) return;
+  return dateString.split(",").map((date) =>
+    new Date(date)
+      .toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
       })
-    );
+      .toUpperCase()
+  );
 }
 
 export default formatDates;

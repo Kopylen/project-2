@@ -8,7 +8,7 @@ const NavBar = () => {
   const [gameQuery, setGameQuery] = useContext(GameQueryContext);
 
   return (
-    <nav className="navbar bg-body-tertiary">
+    <nav className="navbar p-3">
       <div className="container-fluid justify-content-between">
         <div>
           <a className="navbar-brand">

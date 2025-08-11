@@ -29,16 +29,16 @@ const PlatformIconList = ({ platforms }: Props) => {
     web: BsGlobe,
   };
   return (
-    <>
+    <span className="m-2">
       {platforms.map((platform) => {
         const IconComponent = iconMap[platform.slug];
         return IconComponent ? (
-          <span key={platform.id} className="me-2">
-            <IconComponent title={platform.name} color="gray" />
+          <span key={platform.id} className="mx-1">
+            <IconComponent title={platform.name} color="" />
           </span>
         ) : null;
       })}
-    </>
+    </span>
   );
 };
 

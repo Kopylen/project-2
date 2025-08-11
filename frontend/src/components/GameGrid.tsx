@@ -16,8 +16,8 @@ const GameGrid = () => {
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <main className="col-md-9">
-      <div className="py-3">
+    <main className="col-md-10">
+      <div className="">
         <GameHeading gameQuery={gameQuery} />
         <SortSelector
           onSelectOrder={(sortOrder) => {
@@ -28,7 +28,7 @@ const GameGrid = () => {
         />
       </div>
 
-      <div className="row row-cols-1 row-cols-md-3 g-3">
+      <div className="row row-cols-1 row-cols-md-4 g-4 px-2 pt-4">
         {/* Main content here */}
         {isLoading &&
           skeleton.map((p) => (
@@ -40,7 +40,7 @@ const GameGrid = () => {
         {data &&
           data.map((game) => (
             <Link
-              to={`/game/${game.id}`}
+              to={`/game/${game.slug}`}
               className="text-white text-decoration-none"
             >
               <div className="col" key={game.id}>

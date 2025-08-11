@@ -11,10 +11,7 @@ interface Props {
 }
 
 const GameCard = ({ game }: Props) => {
-  let color =
-    game.metacritic > 75
-      ? "bg-success border-success"
-      : "bg-warning border-warning";
+  let color = game.metacritic > 75 ? "success" : "warning";
 
   let emj = { src: "", size: "", alt: "" };
 
@@ -29,7 +26,7 @@ const GameCard = ({ game }: Props) => {
 
   return (
     <>
-      <div className="card border rounded">
+      <div className="card rounded shadow">
         <img
           src={getCroppedImageUrl(game.background_image)}
           className="card-img-top"
@@ -45,7 +42,9 @@ const GameCard = ({ game }: Props) => {
               )}
             </div>
             {game.metacritic && (
-              <div className={`border rounded px-2 py-1 ${color}`}>
+              <div
+                className={`border rounded px-2 border-${color} text-${color}`}
+              >
                 <CriticScore score={game.metacritic} />
               </div>
             )}

@@ -20,7 +20,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  useEffect(() => {}, [darkMode]);
+  useEffect(() => {}, [darkMode, gameQuery]);
 
   return (
     <div
@@ -34,7 +34,7 @@ function App() {
       <modeContext.Provider value={[darkMode, setDarkMode]}>
         <GameQueryContext.Provider value={[gameQuery, setGameQuery]}>
           <NavBar />
-          <div className="mt-4" data-bs-theme={darkMode ? "" : "light"}>
+          <div className="mt-1" data-bs-theme={darkMode ? "" : "light"}>
             <div className="row">
               <Aside />
               <Outlet />

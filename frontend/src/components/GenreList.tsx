@@ -9,15 +9,10 @@ interface Props {
 const GenreList = ({ onSelectGenre, Genre }: Props) => {
   const { data, isLoading } = useGenres();
   return (
-    <div className="p-3">
-      <h1
-        className="display-6"
-        onClick={() => onSelectGenre(null)}
-        style={{ cursor: "pointer" }}
-      >
-        {" "}
-        Genres{" "}
-      </h1>
+    <div className="px-4">
+      <h3 onClick={() => onSelectGenre(null)} style={{ cursor: "pointer" }}>
+        Genres
+      </h3>
       {isLoading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -25,17 +20,17 @@ const GenreList = ({ onSelectGenre, Genre }: Props) => {
       )}
       <ul className="list-unstyled">
         {data.map((genre) => (
-          <li key={genre.id} className="">
+          <li key={genre.id} className="m-2">
             {" "}
             <img
-              className="boder rounded p-2"
+              className="boder rounded"
               src={genre.image_background}
-              height="57px"
-              width="57px"
+              height="36px"
+              width="35px"
             />
             <span
               onClick={() => onSelectGenre(genre)}
-              className={`underline underline ${
+              className={`underline underline mx-1 ${
                 Genre == genre && "fw-bolder"
               } `}
               style={{ cursor: "pointer" }}

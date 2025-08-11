@@ -3,7 +3,7 @@ interface Props {
 }
 
 const CriticScore = ({ score }: Props) => {
-  return <div>{score}</div>;
+  return <span>{score}</span>;
 };
 
 export default CriticScore;

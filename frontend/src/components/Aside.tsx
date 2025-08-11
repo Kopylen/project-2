@@ -11,7 +11,7 @@ const Aside = () => {
     <aside className="col-md-2">
       <div>
         <Link to="/" className="text-decoration-none text-reset">
-          <p className="px-3 display-6">Home</p>
+          <h3 className="px-4 pt-4">Home</h3>
         </Link>
         <PlatformList
           onSelectedPlatform={(platform) =>

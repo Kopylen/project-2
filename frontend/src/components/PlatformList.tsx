@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { Platforms } from "../hooks/usePlatforms";
 import {
   FaWindows,
@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 
 import { SiNintendo } from "react-icons/si";
+import { modeContext } from "../App";
 
 interface Props {
   onSelectedPlatform: (platform: Platforms | null) => void;
@@ -26,18 +27,24 @@ const PlatformList = ({ onSelectedPlatform }: Props) => {
   ];
 
   const [selectedItem, setSelectedItem] = useState(0);
+  const [darkMode] = useContext(modeContext);
+  const [color1, setColor1] = useState("");
+  const [color2, setColor2] = useState("");
 
+  useEffect(() => {
+    setColor1(darkMode ? "white" : "dark");
+    setColor2(darkMode ? "dark" : "white");
+  }, [darkMode]);
+  //console.log(color1, color2);
   return (
-    <div className="p-3">
-      <h1
-        className="display-6"
+    <div className="px-4 py-3">
+      <h3
         style={{ cursor: "pointer" }}
         onClick={() => onSelectedPlatform(null)}
       >
-        {" "}
-        Platform{" "}
-      </h1>
-      <ul className="list-unstyled px-2">
+        Platform
+      </h3>
+      <ul className="list-unstyled px-1">
         {data.map((platform) => (
           <li
             key={platform.id}
@@ -48,12 +55,20 @@ const PlatformList = ({ onSelectedPlatform }: Props) => {
             onClick={() => onSelectedPlatform(platform)}
           >
             <span
-              className={`border rounded p-2 bg-${
-                selectedItem == platform.id ? "white" : ""
+              className={`rounded border p-2 bg-${
+                selectedItem == platform.id ? color1 : color2
               }`}
             >
               <platform.img
-                color={selectedItem == platform.id ? "black" : ""}
+                color={
+                  selectedItem == platform.id
+                    ? color2 == "dark"
+                      ? "black"
+                      : "white"
+                    : color1 == "dark"
+                    ? "black"
+                    : "white"
+                }
               />
             </span>{" "}
             <span>{platform.name}</span>

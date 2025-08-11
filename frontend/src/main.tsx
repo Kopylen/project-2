@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <GameGrid /> }, // homepage
-      { path: "game/:id", element: <GamePage /> }, // detail page
+      { path: "game/:gameSlug", element: <GamePage /> }, // detail page
     ],
   },
   {

@@ -1,14 +1,14 @@
-import type { GameQuery } from "./GameGrid";
+import type { GameQuery } from "../App";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 const GameHeading = ({ gameQuery }: Props) => {
-  const heading = `${gameQuery?.platform?.name || ""} ${
+  const heading = `${gameQuery?.platform?.name || "All"} ${
     gameQuery?.genre?.name || ""
   } Games`;
-  return <h1 className="display-5 pb-2">{heading}</h1>;
+  return <h1 className="display-2 pb-2 fw-bold">{heading}</h1>;
 };
 
 export default GameHeading;
