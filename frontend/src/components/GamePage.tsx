@@ -33,6 +33,17 @@ interface Requirement {
   recommended: string;
 }
 
+interface Store {
+  store_id: number;
+  url: string;
+}
+
+interface StoreInfo {
+  id: number;
+  name: string;
+  image_background: string;
+}
+
 export interface GameById {
   id: number;
   slug: string;
@@ -57,6 +68,8 @@ const GamePage = () => {
   const { data, isLoading } = useGamesById(slug.gameSlug);
   const [screenshots, setScreeshots] = useState<Image[]>();
   const [trailer, setTrailer] = useState<Video[]>();
+  const [stores, setStore] = useState<Store[]>([]);
+  const [storeInfo, setStoreInfo] = useState<StoreInfo[]>([]);
 
   const released = formatDates(data?.released);
   const stripHtml = (html: string) => html.replace(/<[^>]+>/g, "");
@@ -76,12 +89,25 @@ const GamePage = () => {
     apiClient
       .get(`games/${slug.gameSlug}/movies`)
       .then((res) => setTrailer(res.data.results));
-    apiClient
-      .get(`games/${slug.gameSlug}/stores`)
-      .then((res) => console.log(res.data.results));
+    apiClient.get(`games/${slug.gameSlug}/stores`).then((res) => {
+      setStore(res.data.results);
+    });
+    apiClient.get("/stores").then((res) => setStoreInfo(res.data.results));
   }, []);
 
-  // console.log(data);
+  const [dictStore, setDictStore] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    if (storeInfo.length > 0) {
+      const dict: Record<number, number> = {};
+      storeInfo.forEach((store, index) => {
+        dict[store.id] = index;
+      });
+      setDictStore(dict);
+    }
+  }, [storeInfo]);
+
+  //console.log(stores);
 
   return (
     <>
@@ -100,9 +126,15 @@ const GamePage = () => {
           .text-pointer {
             cursor: pointer;
           }
+          .bg-gray {
+            background: #2d2d2d;
+          }
+          .text-gray {
+              color: #818181;
+            }
         `}
       </style>
-      <main className="col-md-9 px-5">
+      <main className="col-md-9 px-4">
         {isLoading ? (
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -293,12 +325,14 @@ const GamePage = () => {
                       </span>
                     </>
                   )}
+                  <br />
+                  <p></p>
                 </>
               ))}
             </div>
             {/* Game Photos */}
 
-            <div className="col-md-5 py-4">
+            <div className="col-md-5 py-4 ">
               <img
                 src={data?.background_image}
                 width={397}
@@ -307,24 +341,39 @@ const GamePage = () => {
               />
               <div className="row gx-1">
                 <div className="col-6 p-1">
-                  {trailer?.map((video, index) => {
-                    if (index > 0) return null;
-                    return (
-                      <video
-                        className="rounded shadow"
-                        width="186"
-                        height="104"
-                        muted
-                        autoPlay
-                        loop
-                        controls
-                        poster={video.preview}
-                      >
-                        <source src={video.data.max} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    );
-                  })}
+                  {trailer?.length
+                    ? trailer?.map((video, index) => {
+                        if (index > 0) return null;
+                        return (
+                          <video
+                            className="rounded shadow"
+                            width="186"
+                            height="104"
+                            muted
+                            autoPlay
+                            loop
+                            controls
+                            poster={video.preview}
+                          >
+                            <source src={video.data.max} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        );
+                      })
+                    : screenshots?.map((image, index) => {
+                        if (index != 3) return null;
+                        return (
+                          <div className="col-6 p-1" key={image.id}>
+                            <img
+                              src={image.image}
+                              className="rounded shadow-lg"
+                              width={186}
+                              height={104}
+                              style={{ objectFit: "cover" }}
+                            />
+                          </div>
+                        );
+                      })}
                 </div>
                 {screenshots?.map((image, index) => {
                   if (index > 2) return null;
@@ -344,8 +393,25 @@ const GamePage = () => {
                   {" "}
                   Last modified: {formatDates(data?.updated)}{" "}
                 </p>
-                <h4 className="text-seconadry fw-light">Where to buy</h4>
-                <p className="text-green-400"> njdnjcd </p>
+                <h5 className="text-gray fw-light">Where to buy</h5>
+                <div className="row p-0 mt-2">
+                  {stores.map((store) => {
+                    const index = dictStore[store.store_id];
+                    const data = storeInfo[index];
+                    return (
+                      <div className="col-6">
+                        <a
+                          href={store.url}
+                          className="text-reset text-decoration-none"
+                        >
+                          <p className="bordered bg-gray text-center py-2 rounded text-gray">
+                            {data.name}
+                          </p>
+                        </a>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

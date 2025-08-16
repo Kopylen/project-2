@@ -1,11 +1,13 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
+import { modeContext } from "../App";
 
 interface Props {
   onSearch: (searchText: string) => void;
 }
 
 const SearchInput = ({ onSearch }: Props) => {
+  const darkMode = useContext(modeContext);
   const Color = "gray";
 
   const ref = useRef<HTMLInputElement>(null);
